@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PSPWebApi.Data;
+using PSPWebApi.Models;
 
 namespace PSPWebApi.Controllers
 {   

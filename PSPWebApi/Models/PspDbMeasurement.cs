@@ -8,14 +8,14 @@ namespace PSPWebApi.Models
 {
     public class PspDbMeasurement
     {
-        [Required]
-        public int ID  { get; set; }
+        [Key]
+        public int Id { get; set; }
         [Required]
         public string Label { get; set; }
         [Required]
-        public string TableName { get; set; }
-        public string TimeColName { get; set; }
+        public string PspTable { get; set; }
         [Required]
-        public string ValColName { get; set; }
+        public string PspValCol { get; set; }
+        public string PspTimeCol { get; set; }
     }
 }
