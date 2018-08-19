@@ -20,6 +20,10 @@ namespace PSPWebApi.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("EntityCol");
+
+                    b.Property<string>("EntityVal");
+
                     b.Property<string>("Label")
                         .IsRequired();
 
@@ -31,6 +35,12 @@ namespace PSPWebApi.Migrations
                     b.Property<string>("PspValCol")
                         .IsRequired();
 
+                    b.Property<string>("QueryParamVals");
+
+                    b.Property<string>("QueryParams");
+
+                    b.Property<string>("SqlStr");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Label")
@@ -39,7 +49,14 @@ namespace PSPWebApi.Migrations
                     b.ToTable("PspDbMeasurements");
 
                     b.HasData(
-                        new { Id = 1, Label = "Gujarat Demand MU", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "Date", PspValCol = "GujaratDemMu" }
+                        new { Id = 1, EntityCol = "STATE_NAME", EntityVal = "GUJARAT", Label = "gujarat_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
+                        new { Id = 2, EntityCol = "STATE_NAME", EntityVal = "MAHARASHTRA", Label = "maharashtra_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
+                        new { Id = 3, EntityCol = "STATE_NAME", EntityVal = "MADHYA PRADESH", Label = "madhya_pradesh_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
+                        new { Id = 4, EntityCol = "STATE_NAME", EntityVal = "DAMAN AND DIU", Label = "dd_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
+                        new { Id = 5, EntityCol = "STATE_NAME", EntityVal = "DADRA AND NAGAR HAVELI", Label = "dnh_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
+                        new { Id = 6, EntityCol = "STATE_NAME", EntityVal = "ESIL", Label = "esil_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
+                        new { Id = 7, EntityCol = "STATE_NAME", EntityVal = "CHHATISGARH", Label = "chhattisgarh_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
+                        new { Id = 8, EntityCol = "STATE_NAME", EntityVal = "GOA", Label = "goa_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" }
                     );
                 });
 #pragma warning restore 612, 618

@@ -5,6 +5,7 @@ using Oracle.ManagedDataAccess.Client; // ODP.NET, Managed Driver
 using System.Linq;
 using System.Threading.Tasks;
 using PSPWebApi.Models.PSP;
+using PSPWebApi.Models;
 
 namespace PSPWebApi.DbUtils
 {
@@ -12,7 +13,7 @@ namespace PSPWebApi.DbUtils
     {
         public string ConnStr { get; set; } = "";
 
-        public TableRowsApiResultModel GetDbTableRows()
+        public TableRowsApiResultModel GetDbTableRows(string sqlStr)
         {
             // initiate the result
             TableRowsApiResultModel rows = new TableRowsApiResultModel();
@@ -26,7 +27,7 @@ namespace PSPWebApi.DbUtils
                 OracleCommand cmd = new OracleCommand
                 {
                     Connection = conn,
-                    CommandText = "select * from AC_TRANS_LINE_MASTER",
+                    CommandText = sqlStr,
                     CommandType = CommandType.Text
                 };
 
@@ -66,6 +67,15 @@ namespace PSPWebApi.DbUtils
             // return the result
             return rows;
         }
+
+        public TableRowsApiResultModel GetLabelData(PspDbMeasurement pspDbMeasurement, int fromTime, int toTime)
+        {
+            // get the label details from the sqlite context
+            string sql = $"select {pspDbMeasurement.PspTimeCol}, {pspDbMeasurement.PspValCol} from {pspDbMeasurement.PspTable} where {pspDbMeasurement.EntityCol}='{pspDbMeasurement.EntityVal}' AND ({pspDbMeasurement.PspTimeCol} BETWEEN {fromTime} AND {toTime}) ORDER BY {pspDbMeasurement.PspTimeCol} ASC";
+            return GetDbTableRows(sql);
+
+            //todo handle if sqlStr attribute of pspDbMeasurement is not null
+        }
     }
 }
 
@@ -88,5 +98,8 @@ namespace PSPWebApi.DbUtils
     Use the following to get the field vaue by column name
     dr.GetInt32(dr.GetOrdinal("ID"))
     dr.GetString(dr.GetOrdinal("LINE_NAME"))
+
+    parameterized queries with oracle connection
+    https://www.codeproject.com/Tips/1076851/Oracle-Parameterized-Queries-for-the-NET-Developer
 
      */

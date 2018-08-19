@@ -17,5 +17,12 @@ namespace PSPWebApi.Models
         [Required]
         public string PspValCol { get; set; }
         public string PspTimeCol { get; set; }
+
+        public string EntityCol { get; set; }
+        public string EntityVal { get; set; }
+
+        public string SqlStr { get; set; }
+        public string QueryParams { get; set; }
+        public string QueryParamVals { get; set; }
     }
 }

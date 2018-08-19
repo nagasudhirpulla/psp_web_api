@@ -9,9 +9,7 @@ namespace PSPWebApi.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PspDbMeasurement>().HasData(
-                 new PspDbMeasurement { Id = 1, Label = "Gujarat Demand MU", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "Date", PspValCol = "GujaratDemMu" }
-             );
+            modelBuilder.Entity<PspDbMeasurement>().HasData(DbInitializer.GetSeeds());
 
             modelBuilder.Entity<PspDbMeasurement>()
             .HasIndex(m => m.Label)
