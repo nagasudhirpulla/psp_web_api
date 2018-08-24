@@ -27,7 +27,14 @@ namespace PSPWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlite("DataSource=app.db"));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);            
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            // https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-2.1
+            //https://stackoverflow.com/questions/31942037/how-to-enable-cors-in-asp-net-core
+            services.AddCors(options =>
+            {
+                options.AddPolicy("anyorigin",
+                    policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

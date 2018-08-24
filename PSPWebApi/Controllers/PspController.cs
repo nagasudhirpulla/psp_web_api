@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -12,6 +13,7 @@ using PSPWebApi.Models.PSP;
 
 namespace PSPWebApi.Controllers
 {
+    [EnableCors("anyorigin")]
     [Route("api/[controller]")]
     [ApiController]
     public class PspController : ControllerBase
