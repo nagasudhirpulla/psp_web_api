@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PSPDataFetchLayer.Models
 {
     public class PspMeasurement
-    {
+    {        
         public int MeasId { get; set; }
         public string Label { get; set; }
         public string PspTable { get; set; }

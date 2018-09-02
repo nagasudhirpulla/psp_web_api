@@ -16,6 +16,24 @@ namespace PSPDataFetchLayer.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //// Configure primary key
+            //modelBuilder.Entity<PspMeasurement>().HasKey(s => s.MeasId);
+
+            //// Configure uniue/alternate key
+            //modelBuilder.Entity<PspMeasurement>().HasIndex(m => m.Label).IsUnique();
+
+            ////Configure NotNull Columns
+            //modelBuilder.Entity<PspMeasurement>().Property(p => p.Label).IsRequired();
+            //modelBuilder.Entity<PspMeasurement>().Property(p => p.PspTable).IsRequired();
+            //modelBuilder.Entity<PspMeasurement>().Property(p => p.PspValCol).IsRequired();
+
+            //// set seeds
+            //modelBuilder.Entity<PspMeasurement>().HasData(DbInitializer.GetSeeds());
+            FluentMethods(modelBuilder);
+        }
+
+        public static void FluentMethods(ModelBuilder modelBuilder)
+        {
             // Configure primary key
             modelBuilder.Entity<PspMeasurement>().HasKey(s => s.MeasId);
 
