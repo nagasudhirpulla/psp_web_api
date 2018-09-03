@@ -1,0 +1,74 @@
+﻿@model PSPDataFetchLayer.Models.PspMeasurement
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>PspMeasurement</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MeasId" />
+            <div class="form-group">
+                <label asp-for="Label" class="control-label"></label>
+                <input asp-for="Label" class="form-control" />
+                <span asp-validation-for="Label" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PspTable" class="control-label"></label>
+                <input asp-for="PspTable" class="form-control" />
+                <span asp-validation-for="PspTable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PspValCol" class="control-label"></label>
+                <input asp-for="PspValCol" class="form-control" />
+                <span asp-validation-for="PspValCol" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PspTimeCol" class="control-label"></label>
+                <input asp-for="PspTimeCol" class="form-control" />
+                <span asp-validation-for="PspTimeCol" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EntityCol" class="control-label"></label>
+                <input asp-for="EntityCol" class="form-control" />
+                <span asp-validation-for="EntityCol" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EntityVal" class="control-label"></label>
+                <input asp-for="EntityVal" class="form-control" />
+                <span asp-validation-for="EntityVal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SqlStr" class="control-label"></label>
+                <input asp-for="SqlStr" class="form-control" />
+                <span asp-validation-for="SqlStr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QueryParams" class="control-label"></label>
+                <input asp-for="QueryParams" class="form-control" />
+                <span asp-validation-for="QueryParams" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QueryParamVals" class="control-label"></label>
+                <input asp-for="QueryParamVals" class="form-control" />
+                <span asp-validation-for="QueryParamVals" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

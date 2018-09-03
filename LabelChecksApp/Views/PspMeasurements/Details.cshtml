@@ -1,0 +1,72 @@
+﻿@model PSPDataFetchLayer.Models.PspMeasurement
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PspMeasurement</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Label)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Label)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PspTable)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PspTable)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PspValCol)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PspValCol)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PspTimeCol)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PspTimeCol)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EntityCol)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EntityCol)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EntityVal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EntityVal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SqlStr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SqlStr)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.QueryParams)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QueryParams)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.QueryParamVals)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QueryParamVals)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MeasId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

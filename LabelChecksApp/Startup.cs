@@ -13,6 +13,7 @@ using LabelChecksApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using LabelChecksApp.Services;
+using LabelChecksDataLayer.Models;
 
 namespace LabelChecksApp
 {
@@ -34,6 +35,10 @@ namespace LabelChecksApp
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            // using label checks database context
+            services.AddDbContext<LabelChecksDbContext>(options => 
+            options.UseSqlServer(@"Server=localhost\SQLEXPRESS01;Database=master;Trusted_Connection=True;"));
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
