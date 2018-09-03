@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSPDataFetchLayer", "PSPDataFetchLayer\PSPDataFetchLayer.csproj", "{38FE8036-77BC-4A9B-8D9C-764E819F71DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSPDataFetchLayer", "PSPDataFetchLayer\PSPDataFetchLayer.csproj", "{38FE8036-77BC-4A9B-8D9C-764E819F71DE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSPWebApi", "PSPWebApi\PSPWebApi.csproj", "{0F7B7FE5-798A-4EB2-ABC6-CF3DBA52C542}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSPDataFetchLayer.Tests", "PSPDataFetchLayer.Tests\PSPDataFetchLayer.Tests.csproj", "{70BBCA43-A7BA-400E-A5AC-0EE6ADFFE4DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelChecksDataLayer", "LabelChecksDataLayer\LabelChecksDataLayer.csproj", "{6242E1AC-8DFA-4BA2-8071-E46B4E30C149}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabelChecksDataLayer", "LabelChecksDataLayer\LabelChecksDataLayer.csproj", "{6242E1AC-8DFA-4BA2-8071-E46B4E30C149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelChecksApp", "LabelChecksApp\LabelChecksApp.csproj", "{A9645BD0-64A7-4EBE-8E03-B09EC9638FFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6242E1AC-8DFA-4BA2-8071-E46B4E30C149}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6242E1AC-8DFA-4BA2-8071-E46B4E30C149}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6242E1AC-8DFA-4BA2-8071-E46B4E30C149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9645BD0-64A7-4EBE-8E03-B09EC9638FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9645BD0-64A7-4EBE-8E03-B09EC9638FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9645BD0-64A7-4EBE-8E03-B09EC9638FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9645BD0-64A7-4EBE-8E03-B09EC9638FFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
