@@ -8,6 +8,7 @@ namespace LabelChecksDataLayer.Models
 {
     public class DbInitializer
     {
+        /*
         public static void SetLabelSeeds(LabelChecksDbContext labelChecksDbContext)
         {
             List<string> labels = new List<string>
@@ -30,6 +31,25 @@ namespace LabelChecksDataLayer.Models
                     CheckType = LabelCheckUtils.CheckTypeNotNull
                 });
             }
+        }
+        */
+
+        public static LabelCheck[] GetLabelSeeds()
+        {
+            LabelCheck[] labelChecks = new LabelCheck[]{
+                new LabelCheck{
+                    Id = 1,
+                    PspMeasurementId = 1,
+                    CheckType = LabelCheckUtils.CheckTypeNotNull
+                },
+                new LabelCheck{
+                    Id = 2,
+                    PspMeasurementId = 2,
+                    CheckType = LabelCheckUtils.CheckTypeNotNull
+                }
+            };
+
+            return labelChecks;
         }
     }
 }

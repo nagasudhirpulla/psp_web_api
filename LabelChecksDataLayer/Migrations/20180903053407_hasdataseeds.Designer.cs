@@ -4,14 +4,16 @@ using LabelChecksDataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LabelChecksDataLayer.Migrations
 {
     [DbContext(typeof(LabelChecksDbContext))]
-    partial class LabelChecksDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180903053407_hasdataseeds")]
+    partial class hasdataseeds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,31 +54,6 @@ namespace LabelChecksDataLayer.Migrations
                         new { Id = 1, CheckType = "not_null", ConsiderEndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), ConsiderStartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Num1 = 0, Num2 = 0, PspMeasurementId = 1 },
                         new { Id = 2, CheckType = "not_null", ConsiderEndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), ConsiderStartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Num1 = 0, Num2 = 0, PspMeasurementId = 2 }
                     );
-                });
-
-            modelBuilder.Entity("LabelChecksDataLayer.Models.LabelCheckResult", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CheckProcessEndTime");
-
-                    b.Property<DateTime>("CheckProcessStartTime");
-
-                    b.Property<bool>("IsSuccessful")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
-
-                    b.Property<int>("LabelCheckId");
-
-                    b.Property<string>("Remarks");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LabelCheckId");
-
-                    b.ToTable("LabelCheckResults");
                 });
 
             modelBuilder.Entity("PSPDataFetchLayer.Models.PspMeasurement", b =>
@@ -130,14 +107,6 @@ namespace LabelChecksDataLayer.Migrations
                     b.HasOne("PSPDataFetchLayer.Models.PspMeasurement", "PspMeasurement")
                         .WithMany()
                         .HasForeignKey("PspMeasurementId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("LabelChecksDataLayer.Models.LabelCheckResult", b =>
-                {
-                    b.HasOne("LabelChecksDataLayer.Models.LabelCheck", "LabelCheck")
-                        .WithMany()
-                        .HasForeignKey("LabelCheckId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

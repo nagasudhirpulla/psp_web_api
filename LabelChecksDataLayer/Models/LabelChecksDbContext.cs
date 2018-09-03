@@ -15,22 +15,40 @@ namespace LabelChecksDataLayer.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //
+            // Configure pspmeasurements from other project
+            //
             PSPMeasDbContext.FluentMethods(modelBuilder);
+
+            //
+            // Configure label checks
+            //
             // Configure primary key
             modelBuilder.Entity<LabelCheck>().HasKey(l => l.Id);
-
             //Configure NotNull Columns
             modelBuilder.Entity<LabelCheck>().Property(l => l.CheckType).IsRequired();
             modelBuilder.Entity<LabelCheck>().Property(l => l.ConsiderStartTime).HasDefaultValue(DateTime.Parse("2018-01-01"));
             modelBuilder.Entity<LabelCheck>().Property(l => l.ConsiderEndTime).HasDefaultValue(DateTime.Parse("2030-01-01"));
             modelBuilder.Entity<LabelCheck>().Property(l => l.PspMeasurementId).IsRequired();
-
             //Configure foriegn keys
             modelBuilder.Entity<LabelCheck>().HasOne(l => l.PspMeasurement).WithMany().HasForeignKey(m => m.PspMeasurementId);
-
             // set seeds
-            //modelBuilder.Entity<PspMeasurement>().HasData(DbInitializer.GetSeeds());
-            //DbInitializer.SetLabelSeeds(this);
+            modelBuilder.Entity<LabelCheck>().HasData(DbInitializer.GetLabelSeeds());
+
+            //
+            // Configure label check results
+            //
+            // Configure table name
+            modelBuilder.Entity<LabelCheckResult>().ToTable("LabelCheckResults");
+            // Configure primary key
+            modelBuilder.Entity<LabelCheckResult>().HasKey(r => r.Id);
+            //Configure NotNull Columns
+            modelBuilder.Entity<LabelCheckResult>().Property(r => r.IsSuccessful).IsRequired().HasDefaultValue(false);
+            modelBuilder.Entity<LabelCheckResult>().Property(r => r.LabelCheckId).IsRequired();
+            modelBuilder.Entity<LabelCheckResult>().Property(r => r.CheckProcessStartTime).IsRequired();
+            modelBuilder.Entity<LabelCheckResult>().Property(r => r.CheckProcessEndTime).IsRequired();
+            //Configure foriegn keys
+            modelBuilder.Entity<LabelCheckResult>().HasOne(r => r.LabelCheck).WithMany().HasForeignKey(r => r.LabelCheckId);
         }
     }
 }
