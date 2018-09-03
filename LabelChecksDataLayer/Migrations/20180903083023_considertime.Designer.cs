@@ -4,14 +4,16 @@ using LabelChecksDataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LabelChecksDataLayer.Migrations
 {
     [DbContext(typeof(LabelChecksDbContext))]
-    partial class LabelChecksDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180903083023_considertime")]
+    partial class considertime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,9 +38,9 @@ namespace LabelChecksDataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(new DateTime(2018, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
-                    b.Property<int?>("Num1");
+                    b.Property<int>("Num1");
 
-                    b.Property<int?>("Num2");
+                    b.Property<int>("Num2");
 
                     b.Property<int>("PspMeasurementId");
 
@@ -49,8 +51,8 @@ namespace LabelChecksDataLayer.Migrations
                     b.ToTable("LabelChecks");
 
                     b.HasData(
-                        new { Id = 1, CheckType = "not_null", ConsiderEndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), ConsiderStartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PspMeasurementId = 1 },
-                        new { Id = 2, CheckType = "not_null", ConsiderEndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), ConsiderStartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PspMeasurementId = 2 }
+                        new { Id = 1, CheckType = "not_null", ConsiderEndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), ConsiderStartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Num1 = 0, Num2 = 0, PspMeasurementId = 1 },
+                        new { Id = 2, CheckType = "not_null", ConsiderEndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), ConsiderStartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Num1 = 0, Num2 = 0, PspMeasurementId = 2 }
                     );
                 });
 

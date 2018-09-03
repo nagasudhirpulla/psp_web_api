@@ -27,8 +27,8 @@ namespace LabelChecksDataLayer.Models
             modelBuilder.Entity<LabelCheck>().HasKey(l => l.Id);
             //Configure NotNull Columns
             modelBuilder.Entity<LabelCheck>().Property(l => l.CheckType).IsRequired();
-            modelBuilder.Entity<LabelCheck>().Property(l => l.ConsiderStartTime).HasDefaultValue(DateTime.Parse("2018-01-01"));
-            modelBuilder.Entity<LabelCheck>().Property(l => l.ConsiderEndTime).HasDefaultValue(DateTime.Parse("2030-01-01"));
+            modelBuilder.Entity<LabelCheck>().Property(l => l.ConsiderStartTime).IsRequired().HasDefaultValue(LabelCheckUtils.DefaultCheckConsiderStartTime);
+            modelBuilder.Entity<LabelCheck>().Property(l => l.ConsiderEndTime).IsRequired().HasDefaultValue(LabelCheckUtils.DefaultCheckConsiderEndTime);
             modelBuilder.Entity<LabelCheck>().Property(l => l.PspMeasurementId).IsRequired();
             //Configure foriegn keys
             modelBuilder.Entity<LabelCheck>().HasOne(l => l.PspMeasurement).WithMany().HasForeignKey(m => m.PspMeasurementId);

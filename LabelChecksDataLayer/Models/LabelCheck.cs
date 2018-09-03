@@ -10,8 +10,8 @@ namespace LabelChecksDataLayer.Models
     {
         public int Id { get; set; }
         public string CheckType { get; set; }
-        public int Num1 { get; set; }
-        public int Num2 { get; set; }
+        public int? Num1 { get; set; }
+        public int? Num2 { get; set; }
         public DateTime ConsiderStartTime { get; set; }
         public DateTime ConsiderEndTime { get; set; }
 

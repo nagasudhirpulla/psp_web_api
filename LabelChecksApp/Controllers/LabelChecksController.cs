@@ -48,6 +48,7 @@ namespace LabelChecksApp.Controllers
         public IActionResult Create()
         {
             ViewData["PspMeasurementId"] = new SelectList(_context.PspDbMeasurements, "MeasId", "Label");
+            ViewData["CheckTypes"] = new SelectList(LabelCheckUtils.CheckTypes);
             return View();
         }
 

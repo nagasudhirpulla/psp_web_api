@@ -4,14 +4,16 @@ using LabelChecksDataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LabelChecksDataLayer.Migrations
 {
     [DbContext(typeof(LabelChecksDbContext))]
-    partial class LabelChecksDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180903094152_nullablenumbers")]
+    partial class nullablenumbers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
