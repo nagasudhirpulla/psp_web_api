@@ -75,6 +75,54 @@ namespace PSPDataFetchLayer.DbUtils
 
             //todo handle if sqlStr attribute of pspDbMeasurement is not null
         }
+
+        public List<PspTimeValTuple> GetLabelVals(PspMeasurement pspMeasurement, int fromTime, int toTime)
+        {
+            TableRowsApiResultModel fetchedData = GetLabelData(pspMeasurement, fromTime, toTime);
+            List<List<object>> rows = fetchedData.TableRows;
+            List<string> colNames = fetchedData.TableColNames;
+            int timeInd = colNames.IndexOf(pspMeasurement.PspTimeCol);
+            int valInd = colNames.IndexOf(pspMeasurement.PspValCol);
+            List<PspTimeValTuple> results = new List<PspTimeValTuple>();
+            if (timeInd == -1 || valInd == -1)
+            {
+                // desired result was not found
+                return results;
+            }
+            for (int rowIter = 0; rowIter < rows.Count; rowIter++)
+            {
+                // todo check val types also
+                int timeInt = (int)rows.ElementAt(rowIter).ElementAt(timeInd);
+                double val = (double)rows.ElementAt(rowIter).ElementAt(valInd);
+                results.Add(new PspTimeValTuple { TimeInt = timeInt, Val = val });
+            }
+            return results;
+        }
+
+        public PspTimeValTuple GetLabelVal(PspMeasurement pspMeasurement, int fromTime)
+        {
+            TableRowsApiResultModel fetchedData = GetLabelData(pspMeasurement, fromTime, fromTime);
+            List<List<object>> rows = fetchedData.TableRows;
+            List<string> colNames = fetchedData.TableColNames;
+            int timeInd = colNames.IndexOf(pspMeasurement.PspTimeCol);
+            int valInd = colNames.IndexOf(pspMeasurement.PspValCol);
+            PspTimeValTuple result = new PspTimeValTuple;
+            if (timeInd == -1 || valInd == -1)
+            {
+                // desired result was not found
+                return null;
+            }
+            if (rows.Count == 0)
+            {
+                // desired result was not found
+                return null;
+            }
+            // todo check val types also
+            int timeInt = (int)rows.ElementAt(0).ElementAt(timeInd);
+            double val = (double)rows.ElementAt(0).ElementAt(valInd);
+            result = new PspTimeValTuple { TimeInt = timeInt, Val = val };
+            return result;
+        }
     }
 }
 
