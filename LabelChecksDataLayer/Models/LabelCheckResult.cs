@@ -7,6 +7,7 @@ namespace LabelChecksDataLayer.Models
 {
     public class LabelCheckResult
     {
+        // todo CheckProcessStartTime, CheckProcessEndTime, LabelCheckId should be unique
         public int Id { get; set; }
         public bool IsSuccessful { get; set; }
         public DateTime CheckProcessStartTime { get; set; }

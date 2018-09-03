@@ -12,6 +12,7 @@ namespace LabelChecksDataLayer.Models
 
         public DbSet<PspMeasurement> PspDbMeasurements { get; set; }
         public DbSet<LabelCheck> LabelChecks { get; set; }
+        public DbSet<LabelCheckResult> LabelCheckResults { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

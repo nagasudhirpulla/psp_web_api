@@ -76,7 +76,7 @@ namespace PSPDataFetchLayer.DbUtils
             //todo handle if sqlStr attribute of pspDbMeasurement is not null
         }
 
-        public List<PspTimeValTuple> GetLabelVals(PspMeasurement pspMeasurement, int fromTime, int toTime)
+        public List<PspTimeValTuple> GetPSPMeasVals(PspMeasurement pspMeasurement, int fromTime, int toTime)
         {
             TableRowsApiResultModel fetchedData = GetLabelData(pspMeasurement, fromTime, toTime);
             List<List<object>> rows = fetchedData.TableRows;
@@ -93,20 +93,19 @@ namespace PSPDataFetchLayer.DbUtils
             {
                 // todo check val types also
                 int timeInt = (int)rows.ElementAt(rowIter).ElementAt(timeInd);
-                double val = (double)rows.ElementAt(rowIter).ElementAt(valInd);
+                double? val = (double?)rows.ElementAt(rowIter).ElementAt(valInd);
                 results.Add(new PspTimeValTuple { TimeInt = timeInt, Val = val });
             }
             return results;
         }
 
-        public PspTimeValTuple GetLabelVal(PspMeasurement pspMeasurement, int fromTime)
+        public PspTimeValTuple GetPSPMeasVal(PspMeasurement pspMeasurement, int fromTime)
         {
             TableRowsApiResultModel fetchedData = GetLabelData(pspMeasurement, fromTime, fromTime);
             List<List<object>> rows = fetchedData.TableRows;
             List<string> colNames = fetchedData.TableColNames;
             int timeInd = colNames.IndexOf(pspMeasurement.PspTimeCol);
             int valInd = colNames.IndexOf(pspMeasurement.PspValCol);
-            PspTimeValTuple result = new PspTimeValTuple;
             if (timeInd == -1 || valInd == -1)
             {
                 // desired result was not found
@@ -120,7 +119,7 @@ namespace PSPDataFetchLayer.DbUtils
             // todo check val types also
             int timeInt = (int)rows.ElementAt(0).ElementAt(timeInd);
             double val = (double)rows.ElementAt(0).ElementAt(valInd);
-            result = new PspTimeValTuple { TimeInt = timeInt, Val = val };
+            PspTimeValTuple result = new PspTimeValTuple { TimeInt = timeInt, Val = val };
             return result;
         }
     }
