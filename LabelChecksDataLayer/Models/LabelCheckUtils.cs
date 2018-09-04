@@ -9,7 +9,7 @@ namespace LabelChecksDataLayer.Models
 {
     public class LabelCheckUtils
     {
-        public static readonly List<string> CheckTypes = new List<string> { CheckTypeNotNull, CheckTypeNotBlank, CheckTypeNumeric, CheckTypeLimit, CheckTypeDevPercLimit };
+        public static readonly List<string> CheckTypes = new List<string> { CheckTypeNotNull, CheckTypeLimit, CheckTypeDevPercLimit };
 
         public const string CheckTypeNotNull = "not_null";
         public const string CheckTypeNotBlank = "not_blank";
@@ -19,6 +19,14 @@ namespace LabelChecksDataLayer.Models
 
         public static readonly DateTime DefaultCheckConsiderStartTime = DateTime.Parse("2018-01-01");
         public static readonly DateTime DefaultCheckConsiderEndTime = DateTime.Parse("2030-01-01");
+
+        public static void ProcessAllLabelChecks(LabelChecksDbContext labelChecksDbContext, string connStr, DateTime fromTime, DateTime toTime)
+        {
+            foreach (LabelCheck labelCheck in labelChecksDbContext.LabelChecks)
+            {
+                ProcessLabelCheck(labelChecksDbContext, connStr, labelCheck, fromTime, toTime);
+            }
+        }
 
         public static void ProcessLabelCheck(LabelChecksDbContext labelChecksDbContext, string connStr, LabelCheck labelCheck, DateTime fromTime, DateTime toTime)
         {
