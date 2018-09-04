@@ -8,6 +8,7 @@ using Xunit;
 using PSPDataFetchLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
+using LabelChecksDataLayer.Models;
 
 namespace PSPDataFetchLayer.Tests.Tests
 {
@@ -25,11 +26,29 @@ namespace PSPDataFetchLayer.Tests.Tests
         }
 
         [Fact]
-        public void PassingTest()
+        public void LabelProcessTest()
         {
-            Assert.Equal(4, 4);
-        }
+            try
+            {
+                //test that does label checking on day before yest data
+                string mainConnStr = Configuration["pspdbinfo:ConnectionString"];
+                Assert.NotNull(mainConnStr);
 
-        //todo create a test that does label checking on day before yest data
+                string connStr = Configuration["psplabelsdbinfo:ConnectionString"];
+                Assert.NotNull(connStr);
+                DbContextOptionsBuilder<LabelChecksDbContext> builder = new DbContextOptionsBuilder<LabelChecksDbContext>().UseSqlServer(connStr);
+                LabelChecksDbContext labelChecksDbContext = new LabelChecksDbContext(builder.Options);
+
+                // do processing
+                DateTime fromTime = DateTime.Now.AddDays(-2);
+                DateTime toTime = DateTime.Now.AddDays(-2);
+                LabelCheckUtils.ProcessAllLabelChecks(labelChecksDbContext, mainConnStr, fromTime, toTime);
+            }
+            catch (Exception e)
+            {
+                // fail the test
+                Assert.Equal(4, 3);
+            }
+        }
     }
 }

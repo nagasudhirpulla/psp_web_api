@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LabelChecksDataLayer\LabelChecksDataLayer.csproj" />
     <ProjectReference Include="..\PSPDataFetchLayer\PSPDataFetchLayer.csproj" />
   </ItemGroup>
 
