@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using PSPDataFetchLayer.DbUtils;
@@ -22,7 +23,7 @@ namespace LabelChecksDataLayer.Models
 
         public static void ProcessAllLabelChecks(LabelChecksDbContext labelChecksDbContext, string connStr, DateTime fromTime, DateTime toTime)
         {
-            foreach (LabelCheck labelCheck in labelChecksDbContext.LabelChecks)
+            foreach (LabelCheck labelCheck in labelChecksDbContext.LabelChecks.Include(l => l.PspMeasurement))
             {
                 ProcessLabelCheck(labelChecksDbContext, connStr, labelCheck, fromTime, toTime);
             }
@@ -30,14 +31,16 @@ namespace LabelChecksDataLayer.Models
 
         public static void ProcessLabelCheck(LabelChecksDbContext labelChecksDbContext, string connStr, LabelCheck labelCheck, DateTime fromTime, DateTime toTime)
         {
+            PspMeasurement meas = labelChecksDbContext.PspDbMeasurements.Where(m => m.MeasId == labelCheck.PspMeasurementId).FirstOrDefault();
+            labelCheck.PspMeasurement = meas;
             List<LabelCheckResult> labelCheckResults = GetLabelCheckResults(connStr, labelCheck, fromTime, toTime);
             //iterate through each result, find if record already exists and update the database
             for (int resIter = 0; resIter < labelCheckResults.Count; resIter++)
             {
                 LabelCheckResult targetRes = labelCheckResults[resIter];
                 LabelCheckResult foundRes = labelChecksDbContext.LabelCheckResults.Where(res => res.LabelCheckId == targetRes.LabelCheckId &&
-                                                                res.CheckProcessEndTime == targetRes.CheckProcessEndTime &&
-                                                                res.CheckProcessStartTime == targetRes.CheckProcessStartTime).FirstOrDefault();
+                                                                res.CheckProcessEndTime.Date == targetRes.CheckProcessEndTime.Date &&
+                                                                res.CheckProcessStartTime.Date == targetRes.CheckProcessStartTime.Date).FirstOrDefault();
                 if (foundRes == null)
                 {
                     // the record doesnot exist, so insert into the db
@@ -45,8 +48,13 @@ namespace LabelChecksDataLayer.Models
                 }
                 else
                 {
-                    targetRes.Id = foundRes.Id;
-                    labelChecksDbContext.LabelCheckResults.Update(targetRes);
+                    //targetRes.Id = foundRes.Id;
+                    // make found result as target result and update
+                    foundRes.IsSuccessful = targetRes.IsSuccessful;
+                    foundRes.Remarks = targetRes.Remarks;
+                    foundRes.CheckProcessEndTime = targetRes.CheckProcessEndTime;
+                    foundRes.CheckProcessStartTime = targetRes.CheckProcessStartTime;
+                    labelChecksDbContext.LabelCheckResults.Update(foundRes);
                 }
             }
             labelChecksDbContext.SaveChanges();
@@ -63,7 +71,7 @@ namespace LabelChecksDataLayer.Models
             // do the checking algorithm on each tuple to produce check results
             List<LabelCheckResult> labelCheckResults = new List<LabelCheckResult>();
             // initialize a checkresult for each date with remark, data not found for processing
-            for (int dayIter = 0; dayIter < (toTime - fromTime).Days; dayIter++)
+            for (int dayIter = 0; dayIter <= (toTime - fromTime).Days; dayIter++)
             {
                 labelCheckResults.Add(new LabelCheckResult { IsSuccessful = false, CheckProcessStartTime = fromTime.AddDays(dayIter), CheckProcessEndTime = fromTime.AddDays(dayIter), LabelCheckId = labelCheck.Id, Remarks = "data not processed" });
             }
@@ -76,20 +84,24 @@ namespace LabelChecksDataLayer.Models
                 PspTimeValTuple tuple = tuples[tupleIter];
                 // find the tuple to be modified from the list of inititalized results
                 targetResultInd = labelCheckResults.FindIndex(res =>
-                                                    (res.CheckProcessStartTime == ConvertIntToDateTime(tuple.TimeInt) &&
-                                                     res.CheckProcessStartTime == ConvertIntToDateTime(tuple.TimeInt)));
+                                                    (res.CheckProcessStartTime.Date == ConvertIntToDateTime(tuple.TimeInt).Date &&
+                                                     res.CheckProcessEndTime.Date == ConvertIntToDateTime(tuple.TimeInt).Date));
                 if (targetResultInd == -1) { continue; }
                 if (labelCheck.CheckType == CheckTypeNotNull)
                 {
                     targetResult = labelCheckResults.ElementAt(targetResultInd);
                     if (tuple.Val == null)
                     {
+                        targetResult.CheckProcessEndTime = ConvertIntToDateTime(tuple.TimeInt);
+                        targetResult.CheckProcessStartTime = ConvertIntToDateTime(tuple.TimeInt);
                         targetResult.IsSuccessful = false;
                         targetResult.Remarks = "null value found";
                         labelCheckResults[targetResultInd] = targetResult;
                     }
                     else
                     {
+                        targetResult.CheckProcessEndTime = ConvertIntToDateTime(tuple.TimeInt);
+                        targetResult.CheckProcessStartTime = ConvertIntToDateTime(tuple.TimeInt);
                         targetResult.IsSuccessful = true;
                         targetResult.Remarks = "passed";
                         labelCheckResults[targetResultInd] = targetResult;
@@ -100,18 +112,24 @@ namespace LabelChecksDataLayer.Models
                     targetResult = labelCheckResults.ElementAt(targetResultInd);
                     if (tuple.Val >= labelCheck.Num1 && tuple.Val <= labelCheck.Num2)
                     {
+                        targetResult.CheckProcessEndTime = ConvertIntToDateTime(tuple.TimeInt);
+                        targetResult.CheckProcessStartTime = ConvertIntToDateTime(tuple.TimeInt);
                         targetResult.IsSuccessful = true;
                         targetResult.Remarks = "passed";
                         labelCheckResults[targetResultInd] = targetResult;
                     }
                     else if (tuple.Val == null)
                     {
+                        targetResult.CheckProcessEndTime = ConvertIntToDateTime(tuple.TimeInt);
+                        targetResult.CheckProcessStartTime = ConvertIntToDateTime(tuple.TimeInt);
                         targetResult.IsSuccessful = false;
                         targetResult.Remarks = "null value found";
                         labelCheckResults[targetResultInd] = targetResult;
                     }
                     else
                     {
+                        targetResult.CheckProcessEndTime = ConvertIntToDateTime(tuple.TimeInt);
+                        targetResult.CheckProcessStartTime = ConvertIntToDateTime(tuple.TimeInt);
                         targetResult.IsSuccessful = false;
                         targetResult.Remarks = "limits violated";
                         labelCheckResults[targetResultInd] = targetResult;

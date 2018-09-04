@@ -40,13 +40,14 @@ namespace PSPDataFetchLayer.Tests.Tests
                 LabelChecksDbContext labelChecksDbContext = new LabelChecksDbContext(builder.Options);
 
                 // do processing
-                DateTime fromTime = DateTime.Now.AddDays(-2);
-                DateTime toTime = DateTime.Now.AddDays(-2);
+                DateTime fromTime = DateTime.Now.AddDays(-1);
+                DateTime toTime = DateTime.Now.AddDays(-1);
                 LabelCheckUtils.ProcessAllLabelChecks(labelChecksDbContext, mainConnStr, fromTime, toTime);
             }
             catch (Exception e)
             {
                 // fail the test
+                Console.WriteLine(e.Message);
                 Assert.Equal(4, 3);
             }
         }

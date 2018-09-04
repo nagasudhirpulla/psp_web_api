@@ -15,7 +15,7 @@ namespace LabelChecksDataLayer.Models
         public DateTime ConsiderStartTime { get; set; }
         public DateTime ConsiderEndTime { get; set; }
 
-        public virtual PspMeasurement PspMeasurement { get; set; }
+        public PspMeasurement PspMeasurement { get; set; }
         public int PspMeasurementId { get; set; }
     }
 }

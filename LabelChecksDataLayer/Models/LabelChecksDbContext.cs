@@ -32,7 +32,7 @@ namespace LabelChecksDataLayer.Models
             modelBuilder.Entity<LabelCheck>().Property(l => l.ConsiderEndTime).IsRequired().HasDefaultValue(LabelCheckUtils.DefaultCheckConsiderEndTime);
             modelBuilder.Entity<LabelCheck>().Property(l => l.PspMeasurementId).IsRequired();
             //Configure foriegn keys
-            modelBuilder.Entity<LabelCheck>().HasOne(l => l.PspMeasurement).WithMany().HasForeignKey(m => m.PspMeasurementId);
+            modelBuilder.Entity<LabelCheck>().HasOne(l => l.PspMeasurement).WithMany().HasForeignKey(l => l.PspMeasurementId);
             // set seeds
             modelBuilder.Entity<LabelCheck>().HasData(DbInitializer.GetLabelSeeds());
 

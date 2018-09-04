@@ -92,8 +92,8 @@ namespace PSPDataFetchLayer.DbUtils
             for (int rowIter = 0; rowIter < rows.Count; rowIter++)
             {
                 // todo check val types also
-                int timeInt = (int)rows.ElementAt(rowIter).ElementAt(timeInd);
-                double? val = (double?)rows.ElementAt(rowIter).ElementAt(valInd);
+                int timeInt = Convert.ToInt32((decimal)rows.ElementAt(rowIter).ElementAt(timeInd));
+                decimal? val = (decimal)rows.ElementAt(rowIter).ElementAt(valInd);
                 results.Add(new PspTimeValTuple { TimeInt = timeInt, Val = val });
             }
             return results;
@@ -117,8 +117,8 @@ namespace PSPDataFetchLayer.DbUtils
                 return null;
             }
             // todo check val types also
-            int timeInt = (int)rows.ElementAt(0).ElementAt(timeInd);
-            double val = (double)rows.ElementAt(0).ElementAt(valInd);
+            int timeInt = Convert.ToInt32((decimal)rows.ElementAt(0).ElementAt(timeInd));
+            decimal? val = (decimal)rows.ElementAt(0).ElementAt(valInd);
             PspTimeValTuple result = new PspTimeValTuple { TimeInt = timeInt, Val = val };
             return result;
         }
