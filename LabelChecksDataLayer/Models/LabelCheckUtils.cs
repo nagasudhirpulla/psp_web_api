@@ -23,6 +23,7 @@ namespace LabelChecksDataLayer.Models
 
         public static void ProcessAllLabelChecks(LabelChecksDbContext labelChecksDbContext, string connStr, DateTime fromTime, DateTime toTime)
         {
+            Console.WriteLine("Processing all label checks");
             foreach (LabelCheck labelCheck in labelChecksDbContext.LabelChecks.Include(l => l.PspMeasurement))
             {
                 ProcessLabelCheck(labelChecksDbContext, connStr, labelCheck, fromTime, toTime);

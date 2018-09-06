@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LabelChecksApp.Models;
+using Hangfire;
 
 namespace LabelChecksApp.Controllers
 {
@@ -18,6 +19,9 @@ namespace LabelChecksApp.Controllers
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
+
+            //var jobId = BackgroundJob.Enqueue(
+            //    () => Console.WriteLine("Fire-and-forget!"));
 
             return View();
         }

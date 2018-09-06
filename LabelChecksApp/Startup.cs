@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using LabelChecksApp.Services;
 using LabelChecksDataLayer.Models;
+using Hangfire;
+using LabelChecksApp.HangfireStuff;
 
 namespace LabelChecksApp
 {
@@ -50,6 +52,11 @@ namespace LabelChecksApp
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            // Add Hangfire services.            
+            services.AddHangfire(config =>
+            config.UseSqlServerStorage(Configuration.GetConnectionString("HangFireConnection")));
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddRazorPagesOptions(options =>
@@ -89,6 +96,15 @@ namespace LabelChecksApp
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            //The following line is also optional, if you required to monitor your jobs.
+            //Make sure you're adding required authentication 
+            app.UseHangfireDashboard();
+            //app.UseHangfireDashboard("/hangfire", new DashboardOptions
+            //{
+            //    Authorization = new[] { new CustomAuthorizeFilter() }
+            //});
+            app.UseHangfireServer();
 
             app.UseMvc(routes =>
             {
