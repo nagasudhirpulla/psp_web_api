@@ -1,0 +1,16 @@
+﻿@model CheckProcessViewModel;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Process Label Checks</h2>
+
+<form asp-action="CheckProcess">
+    <span>Process Checks For </span>
+    <input asp-for="CheckFromDate" type="date" value="@DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd")"/>
+    <br />
+    <input type="submit" value="Process Checks" class="btn btn-default" />
+</form>
+
+
+
