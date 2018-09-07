@@ -168,9 +168,10 @@ namespace LabelChecksApp.Controllers
             // do processing
             DateTime fromTime = DateTime.Now.AddDays(-1);
             DateTime toTime = DateTime.Now.AddDays(-1);
+            string labelsConnStr = Configuration["psplabelsdbinfo:ConnectionString"];
 
             var jobId = BackgroundJob.Enqueue(
-                () => LabelCheckUtils.ProcessAllLabelChecks(_context, connStr, fromTime, toTime));
+                () => LabelCheckUtils.ProcessAllLabelChecks(labelsConnStr, connStr, fromTime, toTime));
             return RedirectToAction(nameof(Index));
         }
     }

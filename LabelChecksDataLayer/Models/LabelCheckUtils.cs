@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using PSPDataFetchLayer.DbUtils;
 using PSPDataFetchLayer.Models;
 
@@ -21,10 +22,17 @@ namespace LabelChecksDataLayer.Models
         public static readonly DateTime DefaultCheckConsiderStartTime = DateTime.Parse("2018-01-01");
         public static readonly DateTime DefaultCheckConsiderEndTime = DateTime.Parse("2030-01-01");
 
+        public static void ProcessAllLabelChecks(string labelsConnStr, string connStr, DateTime fromTime, DateTime toTime)
+        {
+            Console.WriteLine("Processing all label checks via hangfire");
+            DbContextOptionsBuilder<LabelChecksDbContext> builder = new DbContextOptionsBuilder<LabelChecksDbContext>().UseSqlServer(labelsConnStr);
+            LabelChecksDbContext labelChecksDbContext = new LabelChecksDbContext(builder.Options);
+            ProcessAllLabelChecks(labelChecksDbContext, connStr, fromTime, toTime);
+        }
+
         public static void ProcessAllLabelChecks(LabelChecksDbContext labelChecksDbContext, string connStr, DateTime fromTime, DateTime toTime)
         {
-            Console.WriteLine("Processing all label checks");
-            foreach (LabelCheck labelCheck in labelChecksDbContext.LabelChecks.Include(l => l.PspMeasurement))
+            foreach (LabelCheck labelCheck in labelChecksDbContext.LabelChecks)
             {
                 ProcessLabelCheck(labelChecksDbContext, connStr, labelCheck, fromTime, toTime);
             }
