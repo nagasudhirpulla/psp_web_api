@@ -10,12 +10,10 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-<p>
-    <form asp-action="Index">
-        Find by name: @Html.TextBox("dateStr")
-        <input type="submit" class="btn btn-default" value="Search" />
-    </form>
-</p>
+<form asp-action="Index">
+    Find by name: @Html.TextBox("dateStr")
+    <input type="submit" class="btn btn-default" value="Search" />
+</form>
 
 <table class="table">
     <thead>
@@ -26,9 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.CheckProcessStartTime)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CheckProcessEndTime)
-            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.CheckProcessEndTime)
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Remarks)
             </th>
@@ -42,33 +40,34 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsSuccessful)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CheckProcessStartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CheckProcessEndTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Remarks)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LabelCheck.CheckType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LabelCheck.PspMeasurement.Label)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsSuccessful)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckProcessStartTime)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CheckProcessEndTime)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remarks)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LabelCheck.CheckType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LabelCheck.PspMeasurement.Label)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 

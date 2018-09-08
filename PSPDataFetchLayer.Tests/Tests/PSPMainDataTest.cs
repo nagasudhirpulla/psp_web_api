@@ -8,6 +8,8 @@ using Xunit;
 using PSPDataFetchLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
+using PSPDataFetchLayer.DbUtils;
+using LabelChecksDataLayer.Models;
 
 namespace PSPDataFetchLayer.Tests.Tests
 {
@@ -126,6 +128,28 @@ namespace PSPDataFetchLayer.Tests.Tests
             List<PspMeasurement> measurements = await measDbContext.PspDbMeasurements.ToListAsync();
 
             Assert.NotNull(measurements);
+        }
+
+        [Fact]
+        public void PSPSQLMeasFetchTest()
+        {
+            string connStr = Configuration["pspdbinfo:ConnectionString"];
+            Assert.NotNull(connStr);
+
+            // get measurement fetch helper
+            PspDbHelper helper = new PspDbHelper() { ConnStr = connStr };
+
+            // fetch the measurement values
+            DateTime fromTime = DateTime.Now.AddDays(-1);
+            DateTime toTime = DateTime.Now.AddDays(-1);
+            PspMeasurement meas = new PspMeasurement {
+                PspTimeCol = "DATE_KEY",
+                SqlStr = "select MAX(DATE_KEY) DATE_KEY, SUM(UI) UI from state_load_details where DATE_KEY  BETWEEN :from_time AND :to_time group by DATE_KEY ORDER BY DATE_KEY ASC",
+                PspValCol= "UI"
+            };
+            List<PspTimeValTuple> tuples = helper.GetPSPMeasVals(meas, LabelCheckUtils.ConvertDateTimeToInt(fromTime), LabelCheckUtils.ConvertDateTimeToInt(toTime));
+
+            Assert.False(tuples.Count == 0);
         }
     }
 }
