@@ -56,8 +56,7 @@ namespace LabelChecksApp
             // Add Hangfire services.            
             services.AddHangfire(config =>
             config.UseSqlServerStorage(Configuration.GetConnectionString("HangFireConnection")));
-
-
+                       
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddRazorPagesOptions(options =>
                 {
@@ -74,6 +73,14 @@ namespace LabelChecksApp
             });
 
             services.AddTransient<IEmailSender, EmailSender>();
+
+            // https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-2.1
+            //https://stackoverflow.com/questions/31942037/how-to-enable-cors-in-asp-net-core
+            services.AddCors(options =>
+            {
+                options.AddPolicy("anyorigin",
+                    policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,7 +98,7 @@ namespace LabelChecksApp
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
