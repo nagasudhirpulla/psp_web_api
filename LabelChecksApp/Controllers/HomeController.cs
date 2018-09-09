@@ -18,17 +18,14 @@ namespace LabelChecksApp.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            //var jobId = BackgroundJob.Enqueue(
-            //    () => Console.WriteLine("Fire-and-forget!"));
+            ViewData["Message"] = "This application can be used to perform some preconfigured checks on PSP data";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Contact Page.";
 
             return View();
         }

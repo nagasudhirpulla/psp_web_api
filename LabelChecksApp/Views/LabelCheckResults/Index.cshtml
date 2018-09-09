@@ -5,15 +5,13 @@
     Layout = "~/Views/Shared/_DataTablesLayout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
+</p>*@
 
 <form asp-action="Index">
-    Find by name: @Html.TextBox("dateStr")
-    <input type="submit" class="btn btn-default" value="Search" />
+    Get Checks Results of date: @Html.TextBox("dateStr")
+    <input type="submit" class="btn btn-success" value="Search" />
 </form>
 
 <table id="checkResultsDiv" class="stripe row-border order-column" style="width:100%">
@@ -63,9 +61,9 @@
                     @Html.DisplayFor(modelItem => item.LabelCheck.PspMeasurement.Label)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
                 </td>
             </tr>
         }
@@ -96,5 +94,5 @@
 </table>
 
 <form asp-action="RunChecks">
-    <input type="submit" value="RunChecksForYesterday" class="btn btn-default" />
+    <input type="submit" value="RunChecksForYesterday" class="btn btn-primary" />
 </form>

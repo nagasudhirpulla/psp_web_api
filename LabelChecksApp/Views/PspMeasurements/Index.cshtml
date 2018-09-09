@@ -2,14 +2,13 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DataTablesLayout.cshtml";
 }
 
-<h2>Index</h2>
-
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-default">Create New</a>
 </p>
-<table class="table">
+<table id="checkResultsDiv" class="stripe row-border order-column" style="width:100%">
     <thead>
         <tr>
             <th>
@@ -29,37 +28,61 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EntityVal)
-            </th>            
+            </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
+    <tfoot>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Label)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PspTable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PspValCol)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PspTimeCol)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EntityCol)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EntityVal)
-            </td>            
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MeasId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MeasId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MeasId">Delete</a>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Label)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PspTable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PspValCol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PspTimeCol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EntityCol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EntityVal)
+            </th>
+            <th></th>
         </tr>
-}
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Label)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PspTable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PspValCol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PspTimeCol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntityCol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntityVal)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MeasId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.MeasId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MeasId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

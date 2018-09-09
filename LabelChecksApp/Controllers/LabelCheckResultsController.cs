@@ -25,13 +25,13 @@ namespace LabelChecksApp.Controllers
         public async Task<IActionResult> Index(string dateStr)
         {
             Microsoft.EntityFrameworkCore.Query.IIncludableQueryable<LabelCheckResult, PSPDataFetchLayer.Models.PspMeasurement> labelChecksDbContext;
-            if (!String.IsNullOrEmpty(dateStr))
+            if (!string.IsNullOrEmpty(dateStr))
             {
                 labelChecksDbContext = _context.LabelCheckResults.Where(r => r.CheckProcessStartTime.ToString("yyyy-MM-dd") == dateStr).Include(l => l.LabelCheck).Include(l => l.LabelCheck.PspMeasurement);
             }
             else
-            {            
-            labelChecksDbContext = _context.LabelCheckResults.Include(l => l.LabelCheck).Include(l => l.LabelCheck.PspMeasurement);
+            {
+                labelChecksDbContext = _context.LabelCheckResults.Include(l => l.LabelCheck).Include(l => l.LabelCheck.PspMeasurement);
             }
             //List<LabelCheckResult> lst = await labelChecksDbContext.ToListAsync();
             return View(await labelChecksDbContext.ToListAsync());
