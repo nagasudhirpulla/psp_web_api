@@ -34,4 +34,10 @@
     <ProjectReference Include="..\LabelChecksDataLayer\LabelChecksDataLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Shared\_DataTablesLayout.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

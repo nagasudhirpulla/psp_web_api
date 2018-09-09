@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_DataTablesLayout.cshtml";
 }
 
 <h2>Index</h2>
@@ -16,7 +15,7 @@
     <input type="submit" class="btn btn-default" value="Search" />
 </form>
 
-<table id="checkResultsDiv" class="stripe row-border order-column" style="width:100%">
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -45,10 +44,10 @@
         {
             <tr>
                 <td>
-                    @(item.IsSuccessful ? "Yes" : "No")
+                    @Html.DisplayFor(modelItem => item.IsSuccessful)
                 </td>
                 <td>
-                    @item.CheckProcessStartTime.ToString("dd-MMM-yy")
+                    @Html.DisplayFor(modelItem => item.CheckProcessStartTime)
                 </td>
                 @*<td>
                         @Html.DisplayFor(modelItem => item.CheckProcessEndTime)
@@ -70,29 +69,6 @@
             </tr>
         }
     </tbody>
-    <tfoot>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IsSuccessful)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CheckProcessStartTime)
-            </th>
-            @*<th>
-                        @Html.DisplayNameFor(model => model.CheckProcessEndTime)
-                </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.Remarks)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LabelCheck.CheckType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LabelCheck.PspMeasurement)
-            </th>
-            <th></th>
-        </tr>
-    </tfoot>
 </table>
 
 <form asp-action="RunChecks">

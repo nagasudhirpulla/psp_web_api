@@ -112,7 +112,7 @@ namespace LabelChecksDataLayer.Models
                         targetResult.CheckProcessEndTime = ConvertIntToDateTime(tuple.TimeInt);
                         targetResult.CheckProcessStartTime = ConvertIntToDateTime(tuple.TimeInt);
                         targetResult.IsSuccessful = true;
-                        targetResult.Remarks = "passed";
+                        targetResult.Remarks = $"passed, value={tuple.Val}";
                         labelCheckResults[targetResultInd] = targetResult;
                     }
                 }
@@ -124,7 +124,7 @@ namespace LabelChecksDataLayer.Models
                         targetResult.CheckProcessEndTime = ConvertIntToDateTime(tuple.TimeInt);
                         targetResult.CheckProcessStartTime = ConvertIntToDateTime(tuple.TimeInt);
                         targetResult.IsSuccessful = true;
-                        targetResult.Remarks = "passed";
+                        targetResult.Remarks = $"passed, value={tuple.Val}";
                         labelCheckResults[targetResultInd] = targetResult;
                     }
                     else if (tuple.Val == null)
@@ -140,7 +140,7 @@ namespace LabelChecksDataLayer.Models
                         targetResult.CheckProcessEndTime = ConvertIntToDateTime(tuple.TimeInt);
                         targetResult.CheckProcessStartTime = ConvertIntToDateTime(tuple.TimeInt);
                         targetResult.IsSuccessful = false;
-                        targetResult.Remarks = "limits violated";
+                        targetResult.Remarks = $"limits violated, value={tuple.Val}"; ;
                         labelCheckResults[targetResultInd] = targetResult;
                     }
                 }
