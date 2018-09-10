@@ -23,7 +23,7 @@ namespace PSPDataFetchLayer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Models.PSPMeasDbContext>(options => options.UseSqlServer(@"Server=localhost\SQLEXPRESS01;Database=master;Trusted_Connection=True;"));
+            services.AddDbContext<Models.PSPMeasDbContext>(options => options.UseSqlServer(Configuration["psplabelsdbinfo:ConnectionString"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

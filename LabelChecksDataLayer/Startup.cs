@@ -24,7 +24,7 @@ namespace LabelChecksDataLayer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<LabelChecksDbContext>(options => options.UseSqlServer("Server=NAGASUDHIR\\SQLEXPRESS01;Database=labelsdb;Integrated Security=True;Trusted_Connection=True;MultipleActiveResultSets=true;"));
+            services.AddDbContext<LabelChecksDbContext>(options => options.UseSqlServer(Configuration["psplabelsdbinfo:ConnectionString"]));
         }
 
         public void Configure(IApplicationBuilder app)

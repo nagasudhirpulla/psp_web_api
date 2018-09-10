@@ -76,31 +76,6 @@ namespace LabelChecksDataLayer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "PspDbMeasurements",
-                columns: new[] { "MeasId", "EntityCol", "EntityVal", "Label", "PspTable", "PspTimeCol", "PspValCol", "QueryParamVals", "QueryParams", "SqlStr" },
-                values: new object[,]
-                {
-                    { 1, "STATE_NAME", "GUJARAT", "gujarat_thermal_mu", "STATE_LOAD_DETAILS", "DATE_KEY", "THERMAL", null, null, null },
-                    { 2, "STATE_NAME", "MAHARASHTRA", "maharashtra_thermal_mu", "STATE_LOAD_DETAILS", "DATE_KEY", "THERMAL", null, null, null },
-                    { 3, "STATE_NAME", "MADHYA PRADESH", "madhya_pradesh_thermal_mu", "STATE_LOAD_DETAILS", "DATE_KEY", "THERMAL", null, null, null },
-                    { 4, "STATE_NAME", "DAMAN AND DIU", "dd_thermal_mu", "STATE_LOAD_DETAILS", "DATE_KEY", "THERMAL", null, null, null },
-                    { 5, "STATE_NAME", "DADRA AND NAGAR HAVELI", "dnh_thermal_mu", "STATE_LOAD_DETAILS", "DATE_KEY", "THERMAL", null, null, null },
-                    { 6, "STATE_NAME", "ESIL", "esil_thermal_mu", "STATE_LOAD_DETAILS", "DATE_KEY", "THERMAL", null, null, null },
-                    { 7, "STATE_NAME", "CHHATISGARH", "chhattisgarh_thermal_mu", "STATE_LOAD_DETAILS", "DATE_KEY", "THERMAL", null, null, null },
-                    { 8, "STATE_NAME", "GOA", "goa_thermal_mu", "STATE_LOAD_DETAILS", "DATE_KEY", "THERMAL", null, null, null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "LabelChecks",
-                columns: new[] { "Id", "CheckType", "ConsiderEndTime", "ConsiderStartTime", "Num1", "Num2", "PspMeasurementId" },
-                values: new object[] { 1, "not_null", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 1 });
-
-            migrationBuilder.InsertData(
-                table: "LabelChecks",
-                columns: new[] { "Id", "CheckType", "ConsiderEndTime", "ConsiderStartTime", "Num1", "Num2", "PspMeasurementId" },
-                values: new object[] { 2, "not_null", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 2 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_LabelCheckResults_LabelCheckId",
                 table: "LabelCheckResults",

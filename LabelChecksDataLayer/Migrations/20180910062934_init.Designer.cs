@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LabelChecksDataLayer.Migrations
 {
     [DbContext(typeof(LabelChecksDbContext))]
-    [Migration("20180910045426_init")]
+    [Migration("20180910062934_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,11 +49,6 @@ namespace LabelChecksDataLayer.Migrations
                     b.HasIndex("PspMeasurementId");
 
                     b.ToTable("LabelChecks");
-
-                    b.HasData(
-                        new { Id = 1, CheckType = "not_null", ConsiderEndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), ConsiderStartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PspMeasurementId = 1 },
-                        new { Id = 2, CheckType = "not_null", ConsiderEndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), ConsiderStartTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PspMeasurementId = 2 }
-                    );
                 });
 
             modelBuilder.Entity("LabelChecksDataLayer.Models.LabelCheckResult", b =>
@@ -112,17 +107,6 @@ namespace LabelChecksDataLayer.Migrations
                         .IsUnique();
 
                     b.ToTable("PspDbMeasurements");
-
-                    b.HasData(
-                        new { MeasId = 1, EntityCol = "STATE_NAME", EntityVal = "GUJARAT", Label = "gujarat_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
-                        new { MeasId = 2, EntityCol = "STATE_NAME", EntityVal = "MAHARASHTRA", Label = "maharashtra_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
-                        new { MeasId = 3, EntityCol = "STATE_NAME", EntityVal = "MADHYA PRADESH", Label = "madhya_pradesh_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
-                        new { MeasId = 4, EntityCol = "STATE_NAME", EntityVal = "DAMAN AND DIU", Label = "dd_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
-                        new { MeasId = 5, EntityCol = "STATE_NAME", EntityVal = "DADRA AND NAGAR HAVELI", Label = "dnh_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
-                        new { MeasId = 6, EntityCol = "STATE_NAME", EntityVal = "ESIL", Label = "esil_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
-                        new { MeasId = 7, EntityCol = "STATE_NAME", EntityVal = "CHHATISGARH", Label = "chhattisgarh_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" },
-                        new { MeasId = 8, EntityCol = "STATE_NAME", EntityVal = "GOA", Label = "goa_thermal_mu", PspTable = "STATE_LOAD_DETAILS", PspTimeCol = "DATE_KEY", PspValCol = "THERMAL" }
-                    );
                 });
 
             modelBuilder.Entity("LabelChecksDataLayer.Models.LabelCheck", b =>

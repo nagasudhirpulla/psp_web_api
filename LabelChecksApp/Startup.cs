@@ -40,7 +40,7 @@ namespace LabelChecksApp
 
             // using label checks database context
             services.AddDbContext<LabelChecksDbContext>(options => 
-            options.UseSqlServer(@"Server=localhost\SQLEXPRESS01;Database=master;Trusted_Connection=True;"));
+            options.UseSqlServer(Configuration["psplabelsdbinfo:ConnectionString"]));
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

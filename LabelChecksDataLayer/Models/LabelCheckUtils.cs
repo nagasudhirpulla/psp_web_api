@@ -25,18 +25,31 @@ namespace LabelChecksDataLayer.Models
         public static void ProcessAllLabelChecks(string labelsConnStr, string connStr, DateTime fromTime, DateTime toTime)
         {
             Console.WriteLine("Processing all label checks via hangfire");
+
             DbContextOptionsBuilder<LabelChecksDbContext> builder = new DbContextOptionsBuilder<LabelChecksDbContext>().UseSqlServer(labelsConnStr);
             LabelChecksDbContext labelChecksDbContext = new LabelChecksDbContext(builder.Options);
-            ProcessAllLabelChecks(labelChecksDbContext, connStr, fromTime, toTime);
+
+            foreach (LabelCheck labelCheck in labelChecksDbContext.LabelChecks.ToList())
+            {
+                ProcessLabelCheck(labelsConnStr, connStr, labelCheck, fromTime, toTime);
+            }
         }
 
         public static void ProcessAllLabelChecks(LabelChecksDbContext labelChecksDbContext, string connStr, DateTime fromTime, DateTime toTime)
         {
-            foreach (LabelCheck labelCheck in labelChecksDbContext.LabelChecks)
+            foreach (LabelCheck labelCheck in labelChecksDbContext.LabelChecks.ToList())
             {
                 ProcessLabelCheck(labelChecksDbContext, connStr, labelCheck, fromTime, toTime);
             }
         }
+
+        public static void ProcessLabelCheck(string labelsConnStr, string connStr, LabelCheck labelCheck, DateTime fromTime, DateTime toTime)
+        {
+            DbContextOptionsBuilder<LabelChecksDbContext> builder = new DbContextOptionsBuilder<LabelChecksDbContext>().UseSqlServer(labelsConnStr);
+            LabelChecksDbContext labelChecksDbContext = new LabelChecksDbContext(builder.Options);
+            ProcessLabelCheck(labelChecksDbContext, connStr, labelCheck, fromTime, toTime);
+        }
+
 
         public static void ProcessLabelCheck(LabelChecksDbContext labelChecksDbContext, string connStr, LabelCheck labelCheck, DateTime fromTime, DateTime toTime)
         {
