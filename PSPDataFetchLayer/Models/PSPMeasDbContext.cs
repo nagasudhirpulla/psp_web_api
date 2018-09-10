@@ -46,7 +46,7 @@ namespace PSPDataFetchLayer.Models
             modelBuilder.Entity<PspMeasurement>().Property(p => p.PspValCol).IsRequired();
 
             // set seeds
-            modelBuilder.Entity<PspMeasurement>().HasData(DbInitializer.GetSeeds());
+            //modelBuilder.Entity<PspMeasurement>().HasData(DbInitializer.GetSeeds());
         }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

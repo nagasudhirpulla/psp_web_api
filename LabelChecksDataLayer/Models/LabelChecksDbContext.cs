@@ -34,7 +34,7 @@ namespace LabelChecksDataLayer.Models
             //Configure foriegn keys
             modelBuilder.Entity<LabelCheck>().HasOne(l => l.PspMeasurement).WithMany().HasForeignKey(l => l.PspMeasurementId);
             // set seeds
-            modelBuilder.Entity<LabelCheck>().HasData(DbInitializer.GetLabelSeeds());
+            //modelBuilder.Entity<LabelCheck>().HasData(DbInitializer.GetLabelSeeds());
 
             //
             // Configure label check results
@@ -44,7 +44,7 @@ namespace LabelChecksDataLayer.Models
             // Configure primary key
             modelBuilder.Entity<LabelCheckResult>().HasKey(r => r.Id);
             //Configure NotNull Columns
-            modelBuilder.Entity<LabelCheckResult>().Property(r => r.IsSuccessful).IsRequired().HasDefaultValue(false);
+            modelBuilder.Entity<LabelCheckResult>().Property(r => r.IsSuccessful).IsRequired();
             modelBuilder.Entity<LabelCheckResult>().Property(r => r.LabelCheckId).IsRequired();
             modelBuilder.Entity<LabelCheckResult>().Property(r => r.CheckProcessStartTime).IsRequired();
             modelBuilder.Entity<LabelCheckResult>().Property(r => r.CheckProcessEndTime).IsRequired();

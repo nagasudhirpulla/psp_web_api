@@ -64,9 +64,7 @@ namespace LabelChecksDataLayer.Migrations
 
                     b.Property<DateTime>("CheckProcessStartTime");
 
-                    b.Property<bool>("IsSuccessful")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("IsSuccessful");
 
                     b.Property<int>("LabelCheckId");
 
