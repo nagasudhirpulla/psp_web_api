@@ -33,7 +33,7 @@ namespace PSPDataFetchLayer.DbUtils
                     CommandType = CommandType.Text
                 };
 
-                if (parameters.Count>0)
+                if (parameters.Count > 0)
                 {
                     cmd.BindByName = true;
                     for (int paramIter = 0; paramIter < parameters.Count; paramIter++)
@@ -89,9 +89,9 @@ namespace PSPDataFetchLayer.DbUtils
                 return new TableRowsApiResultModel();
             }
 
-            if (!String.IsNullOrWhiteSpace(pspMeasurement.PspTable) && 
-                !String.IsNullOrWhiteSpace(pspMeasurement.PspValCol) &&  
-                !String.IsNullOrWhiteSpace(pspMeasurement.EntityCol) && 
+            if (!String.IsNullOrWhiteSpace(pspMeasurement.PspTable) &&
+                !String.IsNullOrWhiteSpace(pspMeasurement.PspValCol) &&
+                !String.IsNullOrWhiteSpace(pspMeasurement.EntityCol) &&
                 !String.IsNullOrWhiteSpace(pspMeasurement.EntityVal))
             {
                 // get the label details from the sqlite context
@@ -138,10 +138,27 @@ namespace PSPDataFetchLayer.DbUtils
             }
             for (int rowIter = 0; rowIter < rows.Count; rowIter++)
             {
-                // todo check val types also
-                int timeInt = Convert.ToInt32((decimal)rows.ElementAt(rowIter).ElementAt(timeInd));
-                decimal? val = (decimal)rows.ElementAt(rowIter).ElementAt(valInd);
-                results.Add(new PspTimeValTuple { TimeInt = timeInt, Val = val });
+                // todo check val types also and try to accommodate other types also
+                int timeInt = 0;
+                decimal? val;
+                try
+                {
+                    timeInt = Convert.ToInt32((decimal)rows.ElementAt(rowIter).ElementAt(timeInd));                    
+                }
+                catch (Exception e)
+                {
+                    // didnot find valid timestamp, so we will not record the value
+                    continue;
+                }
+                try
+                {
+                    val = (decimal)rows.ElementAt(rowIter).ElementAt(valInd);
+                }
+                catch (Exception e)
+                {
+                    val = null;
+                }
+                results.Add(new PspTimeValTuple { TimeInt = timeInt, Val = val });                
             }
             return results;
         }
