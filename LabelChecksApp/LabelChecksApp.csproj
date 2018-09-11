@@ -6,6 +6,11 @@
     <UserSecretsId>aspnet-LabelChecksApp-8DA4FB36-BC8F-4395-BCBE-643E5E452162</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>2</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Hangfire.AspNetCore" Version="1.6.20" />
     <PackageReference Include="Hangfire.SqlServer" Version="1.6.20" />
