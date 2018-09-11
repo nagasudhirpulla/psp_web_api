@@ -98,7 +98,11 @@ namespace LabelChecksApp
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseBrowserLink();
+            app.UseDeveloperExceptionPage();
+            app.UseDatabaseErrorPage();
+
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
