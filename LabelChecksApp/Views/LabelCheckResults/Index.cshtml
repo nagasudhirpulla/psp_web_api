@@ -6,11 +6,12 @@
 }
 
 @*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
+        <a asp-action="Create">Create New</a>
+    </p>*@
 
 <form asp-action="Index">
-    Get Checks Results of date: @Html.TextBox("dateStr")
+    Get Checks Results of date: <input type="date" name="dateStr" value="@ViewData["dateStr"]" />
+    
     <input type="submit" class="btn btn-success" value="Search" />
 </form>
 

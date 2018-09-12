@@ -28,12 +28,15 @@ namespace LabelChecksApp.Controllers
             if (!string.IsNullOrEmpty(dateStr))
             {
                 labelChecksDbContext = _context.LabelCheckResults.Where(r => r.CheckProcessStartTime.ToString("yyyy-MM-dd") == dateStr).Include(l => l.LabelCheck).Include(l => l.LabelCheck.PspMeasurement);
+                ViewData["dateStr"] = dateStr;
             }
             else
             {
                 labelChecksDbContext = _context.LabelCheckResults.Include(l => l.LabelCheck).Include(l => l.LabelCheck.PspMeasurement);
+                ViewData["dateStr"] = "";
             }
             //List<LabelCheckResult> lst = await labelChecksDbContext.ToListAsync();
+
             return View(await labelChecksDbContext.ToListAsync());
         }
 
