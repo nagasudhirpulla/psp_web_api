@@ -11,7 +11,7 @@
 
 <form asp-action="Index">
     Get Checks Results of date: <input type="date" name="dateStr" value="@ViewData["dateStr"]" />
-    
+
     <input type="submit" class="btn btn-success" value="Search" />
 </form>
 
@@ -35,6 +35,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LabelCheck.PspMeasurement)
+            </th>
+            <th>
+                Modified Time
             </th>
             <th></th>
         </tr>
@@ -60,6 +63,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LabelCheck.PspMeasurement.Label)
+                </td>
+                <td>
+                    @if (item.DateModified.HasValue)
+                    {
+                        @DateTime.SpecifyKind(item.DateModified.Value, DateTimeKind.Utc).ToLocalTime().ToString("dd-MMM-yy HH:mm");
+                    }
                 </td>
                 <td>
                     @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@

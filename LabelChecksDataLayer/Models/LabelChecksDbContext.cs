@@ -1,12 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PSPDataFetchLayer.Models;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LabelChecksDataLayer.Models
 {
     public class LabelChecksDbContext : DbContext
     {
-        public LabelChecksDbContext(DbContextOptions<LabelChecksDbContext> options) : base(options) {
+        public LabelChecksDbContext(DbContextOptions<LabelChecksDbContext> options) : base(options)
+        {
             //DbInitializer.SetLabelSeeds(this);
         }
 
@@ -50,6 +53,32 @@ namespace LabelChecksDataLayer.Models
             modelBuilder.Entity<LabelCheckResult>().Property(r => r.CheckProcessEndTime).IsRequired();
             //Configure foriegn keys
             modelBuilder.Entity<LabelCheckResult>().HasOne(r => r.LabelCheck).WithMany().HasForeignKey(r => r.LabelCheckId);
+        }
+
+        public override int SaveChanges()
+        {
+            AddTimestamps();
+            return base.SaveChanges();
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            AddTimestamps();
+            return await base.SaveChangesAsync();
+        }
+
+        private void AddTimestamps()
+        {
+            var entities = ChangeTracker.Entries().Where(x => x.Entity is LabelCheckResult && (x.State == EntityState.Added || x.State == EntityState.Modified));
+
+            foreach (var entity in entities)
+            {
+                if (entity.State == EntityState.Added)
+                {
+                    ((LabelCheckResult)entity.Entity).DateCreated = DateTime.UtcNow;
+                }
+             ((LabelCheckResult)entity.Entity).DateModified = DateTime.UtcNow;
+            }
         }
     }
 }

@@ -16,5 +16,8 @@ namespace LabelChecksDataLayer.Models
 
         public int LabelCheckId { get; set; }
         public virtual LabelCheck LabelCheck { get; set; }
+
+        public DateTime? DateCreated { get; set; }
+        public DateTime? DateModified { get; set; }        
     }
 }

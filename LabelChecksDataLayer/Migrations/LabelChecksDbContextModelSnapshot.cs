@@ -59,6 +59,10 @@ namespace LabelChecksDataLayer.Migrations
 
                     b.Property<DateTime>("CheckProcessStartTime");
 
+                    b.Property<DateTime?>("DateCreated");
+
+                    b.Property<DateTime?>("DateModified");
+
                     b.Property<bool>("IsSuccessful");
 
                     b.Property<int>("LabelCheckId");
