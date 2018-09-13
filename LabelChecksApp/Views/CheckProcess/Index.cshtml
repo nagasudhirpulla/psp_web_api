@@ -7,10 +7,15 @@
 
 <form asp-action="CheckProcess">
     <span>Process Checks For </span>
-    <input asp-for="CheckFromDate" type="date" value="@DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd")"/>
+    <input asp-for="CheckFromDate" type="date" value="@Model.CheckFromDate.ToString("yyyy-MM-dd")" />
     <br /><br /><br />
     <input type="submit" value="Process Checks" class="btn btn-primary" />
 </form>
 
+<h5>Number of Queued jobs = @Model.QueuedCount</h5>
+<h5>Number of Succeded jobs today = @Model.SuccededCount</h5>
+<h5>Number of Processing jobs = @Model.ProcessingCount</h5>
+<h5>Number of Scheduled jobs = @Model.ScheduledCount</h5>
+<h5>Number of Failed jobs today = @Model.FailedCount</h5>
 
 

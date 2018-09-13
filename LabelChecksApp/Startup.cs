@@ -16,6 +16,7 @@ using LabelChecksApp.Services;
 using LabelChecksDataLayer.Models;
 using Hangfire;
 using LabelChecksApp.HangfireStuff;
+using System.Net;
 
 namespace LabelChecksApp
 {
@@ -39,7 +40,7 @@ namespace LabelChecksApp
             });
 
             // using label checks database context
-            services.AddDbContext<LabelChecksDbContext>(options => 
+            services.AddDbContext<LabelChecksDbContext>(options =>
             options.UseSqlServer(Configuration["psplabelsdbinfo:ConnectionString"]));
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -56,7 +57,7 @@ namespace LabelChecksApp
             // Add Hangfire services.            
             services.AddHangfire(config =>
             config.UseSqlServerStorage(Configuration.GetConnectionString("HangFireConnection")));
-                       
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddRazorPagesOptions(options =>
                 {
@@ -110,11 +111,12 @@ namespace LabelChecksApp
 
             //The following line is also optional, if you required to monitor your jobs.
             //Make sure you're adding required authentication 
-            app.UseHangfireDashboard();
-            //app.UseHangfireDashboard("/hangfire", new DashboardOptions
-            //{
-            //    Authorization = new[] { new CustomAuthorizeFilter() }
-            //});
+            //app.UseHangfireDashboard();
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions
+            {
+                Authorization = new[] { new CustomAuthorizeFilter() }
+            });
+
             app.UseHangfireServer();
 
             app.UseMvc(routes =>
@@ -122,7 +124,7 @@ namespace LabelChecksApp
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            });            
         }
     }
 }

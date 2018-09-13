@@ -11,5 +11,10 @@ namespace LabelChecksApp.Models
     public class CheckProcessViewModel
     {
         public DateTime CheckFromDate { get; set; }
+        public long ProcessingCount { get; set; }
+        public long ScheduledCount { get; set; }
+        public long FailedCount { get; set; }
+        public long SuccededCount { get; set; }
+        public long QueuedCount { get; set; }
     }
 }

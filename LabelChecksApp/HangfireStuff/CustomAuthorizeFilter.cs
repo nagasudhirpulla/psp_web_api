@@ -12,7 +12,11 @@ namespace LabelChecksApp.HangfireStuff
         public bool Authorize([NotNull] DashboardContext context)
         {
             var httpcontext = context.GetHttpContext();
-            return httpcontext.User.Identity.IsAuthenticated;
+            if (httpcontext.User != null && httpcontext.User.Identity.IsAuthenticated && httpcontext.User.Identity.Name == "Administrator")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
