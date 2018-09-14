@@ -53,6 +53,16 @@ namespace LabelChecksDataLayer.Models
             modelBuilder.Entity<LabelCheckResult>().Property(r => r.CheckProcessEndTime).IsRequired();
             //Configure foriegn keys
             modelBuilder.Entity<LabelCheckResult>().HasOne(r => r.LabelCheck).WithMany().HasForeignKey(r => r.LabelCheckId);
+
+            //
+            // Configure label check params
+            //
+            // Configure primary key
+            modelBuilder.Entity<LabelCheckParam>().HasKey(r => r.Id);
+            //Configure foriegn keys
+            modelBuilder.Entity<LabelCheckParam>().HasOne(r => r.LabelCheck).WithMany(l => l.LabelCheckParams).HasForeignKey(r => r.LabelCheckId);
+            //Configure uniqueness constraint
+            modelBuilder.Entity<LabelCheckParam>().HasIndex(p => new { p.Name, p.LabelCheckId }).IsUnique();
         }
 
         public override int SaveChanges()

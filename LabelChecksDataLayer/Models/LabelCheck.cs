@@ -17,5 +17,7 @@ namespace LabelChecksDataLayer.Models
 
         public PspMeasurement PspMeasurement { get; set; }
         public int PspMeasurementId { get; set; }
+
+        public ICollection<LabelCheckParam> LabelCheckParams { get; set; }
     }
 }
